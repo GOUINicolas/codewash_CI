@@ -16,4 +16,4 @@ jobs:
         run: |
           git clone --mirror "https://x-access-token:${SOURCE_TOKEN}@github.com/EpitechBachelorPromo2028/B-ING-300-PAR-3-1-codewash-32.git" repo.git
           cd repo.git
-          git push --mirror "https://x-access-token:${MIRROR_TOKEN}@github.com/GOUINicolas/codewash_CI.git"
+          git push --prune "https://x-access-token:${MIRROR_TOKEN}@github.com/GOUINicolas/codewash_CI.git" "refs/heads/*:refs/heads/*" "refs/tags/*:refs/tags/*"
