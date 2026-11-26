@@ -1,0 +1,19 @@
+name: Mirror Org Repo
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror repository
+        env:
+          SOURCE_TOKEN: ${{ secrets.SOURCE_TOKEN }}
+          MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          git clone --mirror "https://x-access-token:${SOURCE_TOKEN}@github.com/ORG_NAME/REPO_NAME.git" repo.git
+          cd repo.git
+          git push --mirror "https://x-access-token:${MIRROR_TOKEN}@github.com/TARGET_OWNER/TARGET_REPO.git"
