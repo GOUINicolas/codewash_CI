@@ -14,6 +14,6 @@ jobs:
           SOURCE_TOKEN: ${{ secrets.SOURCE_TOKEN }}
           MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
         run: |
-          git clone --mirror "https://x-access-token:${SOURCE_TOKEN}@github.com/ORG_NAME/REPO_NAME.git" repo.git
+          git clone --mirror "https://x-access-token:${SOURCE_TOKEN}@github.com/EpitechBachelorPromo2028/B-ING-300-PAR-3-1-codewash-32.git" repo.git
           cd repo.git
-          git push --mirror "https://x-access-token:${MIRROR_TOKEN}@github.com/TARGET_OWNER/TARGET_REPO.git"
+          git push --mirror "https://x-access-token:${MIRROR_TOKEN}@github.com/GOUINicolas/codewash_CI.git"
