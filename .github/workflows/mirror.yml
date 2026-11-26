@@ -14,6 +14,7 @@ jobs:
           SOURCE_TOKEN: ${{ secrets.SOURCE_TOKEN }}
           MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
         run: |
-          git clone --mirror "https://x-access-token:${SOURCE_TOKEN}@github.com/EpitechBachelorPromo2028/B-ING-300-PAR-3-1-codewash-32.git" repo.git
-          cd repo.git
-          git push --prune "https://x-access-token:${MIRROR_TOKEN}@github.com/GOUINicolas/codewash_CI.git" "refs/heads/*:refs/heads/*" "refs/tags/*:refs/tags/*"
+            git clone --mirror "https://x-access-token:${SOURCE_TOKEN}@github.com/EpitechBachelorPromo2028/B-ING-300-PAR-3-1-codewash-32.git" repo.git
+            cd repo.git
+            git fetch "https://x-access-token:${MIRROR_TOKEN}@github.com/GOUINicolas/codewash_CI.git" "refs/heads/mirror-runner:refs/heads/mirror-runner"
+            git push --prune --force "https://x-access-token:${MIRROR_TOKEN}@github.com/GOUINicolas/codewash_CI.git" "refs/heads/*:refs/heads/*" "refs/tags/*:refs/tags/*"
