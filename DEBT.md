@@ -130,7 +130,7 @@ Other measures taken with `grep`:
 
 | ID | Location | Smell or issue | Impact | Risk (I × L) | Effort | Priority | Status |
 |---|---|---|---|---|---|---|---|
-| DEBT-001 | repo root, `package-lock.json`, `README.md` | Setup is undocumented and fragile (see details) | 3 | 3 × 5 = 15 | S | P0 | In progress |
+| DEBT-001 | repo root, `package-lock.json`, `README.md` | Setup is undocumented and fragile (see details) | 3 | 3 × 5 = 15 | S | P0 | Done |
 | DEBT-002 | whole repo | No tests, no coverage, no safety net | 5 | 5 × 5 = 25 | M | P0 | Open |
 | DEBT-003 | `.github/workflows/build-exe.yml` | CI only builds the `.exe`: no lint, tests, coverage or static analysis, and it releases on every push to `main` | 4 | 4 × 5 = 20 | M | P0 | Open |
 | DEBT-004 | `App.jsx` (whole file) | God component: game logic, persistence, audio, speech and UI mixed (1,492 lines, about 31 `useState`) | 4 | 4 × 5 = 20 | L | P1 | Open |
@@ -159,14 +159,23 @@ Other measures taken with `grep`:
   2. `vite: not found`: dependencies were not installed.
   3. `EUSAGE ... package-lock.json`: `npm ci` could not find the lock file.
 - **Impact:** a newcomer loses time before reaching a running game, and `.github/workflows/` in a subfolder would be ignored by GitHub.
-- **Plan:**
-  1. Put the project at the repo root (`package.json` next to `.git`).
-  2. Restore `package-lock.json` and commit it.
-  3. Add `.gitignore` (`node_modules/`, `dist/`, `release/`).
-  4. Add `README.md` with prerequisites, quick start and a troubleshooting table.
-  5. Add an `engines` field to `package.json` stating the supported Node version.
-  6. Optional: a `scripts/setup.sh` and `scripts/setup.ps1` that check the Node version and run `npm ci`.
-- **Done when:** a newcomer goes from `git clone` to a running game in under 10 minutes without asking a question.
+- **Resolution:**
+  1. Kept the project in `CodeWashGame/` instead of moving it to the repo
+     root: the CI workflow uses it as its working directory. The README
+     states that every npm command runs from this folder.
+  2. `package-lock.json` is committed.
+  3. `.gitignore` covers `node_modules/`, `dist/`, `release/`, `coverage/`,
+     logs and editor/OS files.
+  4. `README.md` documents dependencies, install and run commands, and a
+     troubleshooting table for the three errors found.
+  5. `engines` field added to `package.json` (`^22.12.0 || ^24.0.0 || >=26.0.0`),
+     matching the vitest requirement. `CodeWashGame/.npmrc` sets
+     `engine-strict=true` so an unsupported Node stops `npm ci` with a clear
+     message. `CodeWashGame/.nvmrc` pins Node 22.
+  6. Not done: setup scripts (`scripts/setup.sh`, `scripts/setup.ps1`).
+     Judged unnecessary now that `engine-strict` reports version problems.
+- **Done when:** a newcomer goes from `git clone` to a running game in under
+  10 minutes without asking a question. Checked on a fresh clone with Node 22.
 
 ---
 
@@ -220,7 +229,7 @@ before/after numbers in section 7.
 
 | ID | Owner | Reviewer | Issue | PR | Branch | Status |
 |---|---|---|---|---|---|---|
-| DEBT-001 | Benoit | Nicolas | | | | In progress |
+| DEBT-001 | Benoit | Nicolas | #2 | | 'DEBT-01_adjustments' | Open |
 | DEBT-002 | Benoit | Nicolas | | | | Open |
 | DEBT-003 | Nicolas | Benoit | | | | Open |
 | DEBT-004 | Benoit | Nicolas | | | | Open |
@@ -272,6 +281,7 @@ New Game+ (New Game+ requires New Game). This is a **proposal**, not a decision.
 | Date | Change | Author |
 |---|---|---|
 | 2026-11-20 | First version: codebase map, 20 debt items, baseline file-size measures, risk matrix attack plan, owners and reviewers per item, working agreement, feature proposal, decisions log | Benoit, Nicolas |
+| 2026-11-27 | DEBT-001 closed: README, .gitignore, .nvmrc, .npmrc, engines field | Benoit |
 | | | |
 
 ### Before / after metrics (to complete)

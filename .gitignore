@@ -1,3 +1,15 @@
+# Dependencies and build output
 */node_modules/
 */dist/
 */release/
+*/coverage/
+
+# Logs
+*.logs
+
+# Editor and OS files
+*.vscode/
+*.idea/
+.DS_Store
+Thumbs.db
+._*

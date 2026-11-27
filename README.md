@@ -4,7 +4,7 @@ A Minecraft-themed educational RPG built with React, Vite and Electron.
 
 ## Dependencies
 
-- [Node.js](https://nodejs.org) 20.19 or newer (includes npm)
+- [Node.js](https://nodejs.org) 22.12 or newer (includes npm)
 - Git
 - Chrome, Edge or Chromium (needed for the microphone feature)
 
@@ -57,7 +57,7 @@ Firefox does not support the speech recognition used by the Reading skill.
 
 ## Install
 
-Run from the folder that contains `package.json`:
+Run from the folder that contains `package.json` (CodeWashGame):
 
 ```bash
 npm ci
@@ -85,4 +85,4 @@ Then open the address shown in the terminal (usually http://localhost:5173).
 
 ## Documentation
 
-See [`docs/DEBT.md`](docs/DEBT.md) for the technical debt register.
+See [`DEBT.md`]('DEBT.md) for the technical debt register.
